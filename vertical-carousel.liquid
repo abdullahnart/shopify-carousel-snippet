@@ -1,0 +1,169 @@
+
+<section class = "vertical--carousel-sec bg-carousel desktop-bg" id="slider-{{ section.id }}">
+{%- for block in section.blocks -%}
+<div class="vertical--carousel-wrapper {% if block.settings.image_position == 'end' %}reverse{% endif %}" 
+{% if block.settings.bg_image != blank %}
+    style="background-image:url('{{ block.settings.bg_image | image_url: width: 2000 }}');"
+  {% endif %}
+>
+<div class="container">
+<div class="bg-slider">
+
+    <div class = "slider-div">
+        <div class = "carousel-wrapper">
+            {%- if block.settings.left_image !=blank -%}
+            <div class = "img-wrapper">
+                {{- block.settings.left_image | image_url: width: block.settings.left_image.width | image_tag: loading: loading_strategy -}}
+            </div>
+            {% endif %}
+            <div class="content-wrapper">
+                {%- if block.settings.enable_icon !=blank -%}
+                    {%- if block.settings.icon !=blank -%}
+                    <div class = "icon-wrapper">
+                        {{- block.settings.icon | image_url: width: block.settings.icon.width | image_tag: loading: loading_strategy -}}
+                    </div>
+                    {% endif %}
+                {% endif %}
+                {%- if block.settings.enable_subheading !=blank -%}
+                    <h6>{{ block.settings.subheading }}</h6>
+                {% endif %}
+                <h2>{{ block.settings.heading }}</h2>
+                <p>{{ block.settings.content }}</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+</div>
+
+  {% endfor %}
+</section>
+<section class = "vertical--carousel-sec bg-carousel mobile-bg" id="slider-{{ section.id }}">
+{%- for block in section.blocks -%}
+<div class="vertical--carousel-wrapper" 
+{% if block.settings.mob_bg != blank %}
+    style="background-image:url('{{ block.settings.mob_bg | image_url: width: 2000 }}');"
+  {% endif %}
+>
+<div class="container">
+<div class="bg-slider">
+
+    <div class = "slider-div">
+        <div class = "carousel-wrapper">
+            {% comment %} {%- if block.settings.left_image !=blank -%}
+            <div class = "img-wrapper">
+                {{- block.settings.left_image | image_url: width: block.settings.left_image.width | image_tag: loading: loading_strategy -}}
+            </div>
+            {% endif %} {% endcomment %}
+            <div class="content-wrapper">
+                {%- if block.settings.enable_icon !=blank -%}
+                    {%- if block.settings.icon !=blank -%}
+                    <div class = "icon-wrapper">
+                        {{- block.settings.icon | image_url: width: block.settings.icon.width | image_tag: loading: loading_strategy -}}
+                    </div>
+                    {% endif %}
+                {% endif %}
+                {%- if block.settings.enable_subheading !=blank -%}
+                    <h6>{{ block.settings.subheading }}</h6>
+                {% endif %}
+                <h2>{{ block.settings.heading }}</h2>
+                <p>{{ block.settings.content }}</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+</div>
+
+  {% endfor %}  
+</section>
+{% schema %}
+{
+  "name": "Vertical Carousel",
+  "tag": "section",
+  "class": "vertical--carousel",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section",
+      "label": "section"
+    }
+  ],
+    "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Vertical slider",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "bg_image",
+          "label": "Desktop Background Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "mob_bg",
+          "label": "Mobile Background Image"
+        },        
+        {
+          "type": "image_picker",
+          "id": "left_image",
+          "label": "Slider Left Image"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_icon",
+          "label": "Enabel Top Icon"
+        },        
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Slider Top Icon"
+        },
+        {
+          "type": "select",
+          "id": "image_position",
+          "label": "t:sections.images_with_text_scroll.image_position",
+          "options": [
+            {
+              "value": "start",
+              "label": "t:global.position.left"
+            },
+            {
+              "value": "end",
+              "label": "t:global.position.right"
+            }
+          ]
+        },        
+        {
+          "type": "checkbox",
+          "id": "enable_subheading",
+          "label": "Enabel Sub Heading"
+        },                                   
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "Slider Sub Heading"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Slider Main Heading"
+        },        
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Slider Content"
+        }       
+
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Vertical Carousel"
+    }
+  ]
+}
+{% endschema %}
